@@ -1,0 +1,49 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        if(s.size()%2!=0) return false;
+        if(s[0]==')' || s[0]=='}' || s[0]==']') return false;
+        stack<char> st;
+        int i=0;
+        while(i<s.size())
+        {
+            if(st.empty()) 
+            {
+                if(s[i]=='}' || s[i]==']' || s[i]==')') return false;
+            }
+            if(s[i]=='(' || s[i]=='{' || s[i]=='[') 
+            {
+                st.push(s[i]);
+                i++;
+                continue;
+            }
+            else
+            {
+                char temp=st.top();
+                if(s[i]==')' && temp=='(') 
+                {
+                    st.pop();
+                    i++;
+                    continue;
+                }
+                else if(s[i]=='}' && temp=='{') 
+                {
+                    st.pop();
+                    i++;
+                    continue;
+                }
+                else if(s[i]==']' && temp=='[') 
+                {
+                    st.pop();
+                    i++;
+                    continue;
+                }
+                else return false;
+            }
+            
+        }
+        if(st.size()>0) return false;
+        return true;
+        
+    }
+};
