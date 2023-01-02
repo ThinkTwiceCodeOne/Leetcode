@@ -1,0 +1,34 @@
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        multiset<double> m;
+        for(int i=0;i<nums1.size();i++) m.insert(nums1[i]);
+        for(int i=0;i<nums2.size();i++) m.insert(nums2[i]);
+        int s=nums1.size()+nums2.size();
+        auto it=m.begin();
+        int count=1;
+        double res;
+        if(s%2==0)
+        {
+            while(it!=m.end())
+            {
+                if(count==s/2) break;
+                it++;
+                count++;
+            }
+            cout<<*it<<endl;
+            res=(*it+*(++it))/2;
+        }
+        else
+        {
+            while(it!=m.end())
+            {
+                if(count==s/2) break;
+                it++;
+                count++;
+            }
+            res=*(++it);
+        }
+        return res;
+    }
+};
